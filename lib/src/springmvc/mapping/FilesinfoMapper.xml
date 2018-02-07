@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="springmvc.dao.FilesinfoMapper">
+  <resultMap id="BaseResultMap" type="springmvc.model.Filesinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="filename" jdbcType="VARCHAR" property="filename" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="upuser" jdbcType="VARCHAR" property="upuser" />
+    <result column="uptime" jdbcType="TIMESTAMP" property="uptime" />
+    <result column="isdelete" jdbcType="TINYINT" property="isdelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, filename, path, upuser, uptime, isdelete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from filesinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from filesinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="springmvc.model.Filesinfo">
+    insert into filesinfo (id, filename, path, 
+      upuser, uptime, isdelete
+      )
+    values (#{id,jdbcType=INTEGER}, #{filename,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{upuser,jdbcType=VARCHAR}, #{uptime,jdbcType=TIMESTAMP}, #{isdelete,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="springmvc.model.Filesinfo">
+    insert into filesinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="filename != null">
+        filename,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="upuser != null">
+        upuser,
+      </if>
+      <if test="uptime != null">
+        uptime,
+      </if>
+      <if test="isdelete != null">
+        isdelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="filename != null">
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="upuser != null">
+        #{upuser,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null">
+        #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="springmvc.model.Filesinfo">
+    update filesinfo
+    <set>
+      <if test="filename != null">
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="upuser != null">
+        upuser = #{upuser,jdbcType=VARCHAR},
+      </if>
+      <if test="uptime != null">
+        uptime = #{uptime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        isdelete = #{isdelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="springmvc.model.Filesinfo">
+    update filesinfo
+    set filename = #{filename,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      upuser = #{upuser,jdbcType=VARCHAR},
+      uptime = #{uptime,jdbcType=TIMESTAMP},
+      isdelete = #{isdelete,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
